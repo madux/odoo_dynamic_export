@@ -75,10 +75,6 @@ class OdooDynamicReporting(models.Model):
         header_name = self.name
         model_name = self.model_id.model
         headers = []
-        # headers= {
-        # 'label': 'Address', 
-        # 'field_name', 'My_field'
-        # }
         for hd in self.model_fields: 
             dicts = {}
             dicts['label'] = hd.label
