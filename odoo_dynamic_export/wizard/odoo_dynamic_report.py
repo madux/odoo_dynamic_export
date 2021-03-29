@@ -1,6 +1,5 @@
 import io
 import xlwt
-
 from datetime import datetime, timedelta, date
 import base64
 from odoo.exceptions import ValidationError
