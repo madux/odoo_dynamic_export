@@ -6,7 +6,7 @@ This module provide feature to help you export records of a chosen model to an x
 - For configuration: Simply Install the module "odoo_dymanic_export". Open the module, click on generate report.
 
 - To generate a report: On the wizard, 'Set a Name, this also determines the name of your file' Select a model.
-- 
+
 -Select the filter type - When None is not selected, you can select either filter by create date or write date
 
 - Under the field setup lines, select a field, add a Label Name. This label name determines the output of the excel header per column.
