@@ -5,7 +5,7 @@
     'version': '1.0',
     'author': "Maach Softwares/ Maduka Sopulu",
     'category': 'Export/ Reports',
-    'summary': 'Odoo Dynamic report to Excel',
+    'summary': 'Odoo Dynamic report to Excel for Odoov12',
 
     'description': "This module enables users to print different types of model records in excel",
     "website": "https://maachmedia.ng",
