@@ -6,7 +6,7 @@ import base64
 from odoo.exceptions import ValidationError
 from odoo import fields, models, api, _
 
-
+    
 class OdooDynamicReportingLine(models.Model):
     _name = "dynamic.report.line"
 
@@ -22,12 +22,15 @@ class OdooDynamicReportingLine(models.Model):
             model = self.env['ir.model'].browse([self.model_id.id])
             # TODO Will still add more features to on2many report option
             field_ids = [rec.id for rec in model.mapped('field_id').\
-                filtered(lambda s: s.ttype != "one2many" and s.store == True)] 
+                filtered(lambda s: s.ttype not in ["one2many", "many2many"] and s.store == True)] 
             res = [0] if not field_ids else field_ids
             if field_ids:
                 domain = {'field_id': [('id', '=', res)]}
                 return {'domain': domain}
-        
+        else:
+            return {'domain': {'field_id': [('id', '=', False)]}}
+
+
 class OdooDynamicReporting(models.Model):
     _name = "odoo.dynamic.report"
 
@@ -75,6 +78,10 @@ class OdooDynamicReporting(models.Model):
         header_name = self.name
         model_name = self.model_id.model
         headers = []
+        # headers= {
+        # 'label': 'Address', 
+        # 'field_name', 'My_field'
+        # }
         for hd in self.model_fields: 
             dicts = {}
             dicts['label'] = hd.label
@@ -102,14 +109,13 @@ class OdooDynamicReporting(models.Model):
                     try:
                         value = recs[str(dic.get('fieldname'))]
                         type_field = type(value)
-                         # TODO: aDD OTHER FIELD TYPE THAT IS NOT SUBSCRIPTABLE
-                        if type_field in [str, int, float, bool]:
+                            # TODO: aDD OTHER FIELD TYPE THAT IS NOT SUBSCRIPTABLE
+                        if type_field in [str, int, float, bool, unicode]:
                             result = value 
                         elif type_field in [datetime, date]:
                             result = datetime.strftime(value, '%m/%d/%Y %H:%M:%S')
                         else:
                             result = value['name']
-
                         ws.write(row, col,result) 
                     except Exception as e:
                         raise ValidationError("The following Error Occured \n {}".format(e))
