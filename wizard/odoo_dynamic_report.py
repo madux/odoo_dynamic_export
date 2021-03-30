@@ -110,11 +110,12 @@ class OdooDynamicReporting(models.Model):
                         value = recs[str(dic.get('fieldname'))]
                         type_field = type(value)
                             # TODO: aDD OTHER FIELD TYPE THAT IS NOT SUBSCRIPTABLE
-                        if type_field in [str, int, float, bool, unicode]:
+                        if type_field in [str, int, float, bool]:
                             result = value 
                         elif type_field in [datetime, date]:
                             result = datetime.strftime(value, '%m/%d/%Y %H:%M:%S')
                         else:
+                            ValidationError(value)
                             result = value['name']
                         ws.write(row, col,result) 
                     except Exception as e:
