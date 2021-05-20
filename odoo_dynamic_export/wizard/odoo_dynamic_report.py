@@ -111,6 +111,7 @@ class OdooDynamicReporting(models.Model):
                         type_field = type(value)
                             # TODO: aDD OTHER FIELD TYPE THAT IS NOT SUBSCRIPTABLE
                         if type_field in [str, int, float, bool]:
+ 
                             result = value 
                         elif type_field in [datetime, date]:
                             result = datetime.strftime(value, '%m/%d/%Y %H:%M:%S')
