@@ -7,7 +7,7 @@
     'category': 'Export/ Reports',
     'summary': 'Odoo Dynamic report to Excel for Odoov10',
     'description': "This module enables users to print different types of model records in excel",
-    "website": "https://maachmedia.ng",
+    "website": "sperality@gmail.com",
     "data": [
         'wizard/odoo_dynamic_report_view.xml',
         'security/ir.model.access.csv',
