@@ -15,7 +15,7 @@ class OdooDynamicReportingLine(models.Model):
     store=True, required=True, ondelete='cascade') 
     label = fields.Char(string='Export Label', size=30, required=True)
     model_id = fields.Many2one('ir.model', string="Model", 
-    ondelete='cascade', required=True)
+    ondelete='cascade', required=True) 
 
     @api.onchange('model_id')
     def domain_fields(self):
