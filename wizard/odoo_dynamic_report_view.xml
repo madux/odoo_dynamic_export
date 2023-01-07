@@ -65,7 +65,7 @@
         <record model="ir.actions.act_window" id="action_odoo_dynamic_report">
             <field name="name">Odoo dynamic Report</field>
             <field name="res_model">odoo.dynamic.report</field>
-            <field name="view_type">form</field>
+            <!-- <field name="view_type">form</field> -->
             <field name="view_mode">form</field>
             <field name="target">new</field>
             <field name="view_id" ref="view_odoo_dynamic_report_form"/>

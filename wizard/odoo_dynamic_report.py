@@ -12,9 +12,10 @@ class OdooDynamicReportingLine(models.Model):
 
     line_id = fields.Many2one('odoo.dynamic.report', required=False)
     field_id = fields.Many2one('ir.model.fields', readonly=False, 
-    store=True, required=True) 
-    label = fields.Char(string='Export Label', size=10, required=True)
-    model_id = fields.Many2one('ir.model', string="Model", required=True)
+    store=True, required=True, ondelete='cascade') 
+    label = fields.Char(string='Export Label', size=30, required=True)
+    model_id = fields.Many2one('ir.model', string="Model", 
+    ondelete='cascade', required=True)
 
     @api.onchange('model_id')
     def domain_fields(self):
@@ -44,7 +45,7 @@ class OdooDynamicReporting(models.Model):
         ('create_date_range', 'Create Date Range')], 
         string='Filter type', default='none')
     model_id = fields.Many2one('ir.model', string="Model", 
-    required=True)
+    required=True, ondelete='cascade')
     model_fields = fields.One2many('dynamic.report.line', 
     'line_id', string="Field Setup Line")
     start_date = fields.Date('Date To')
@@ -58,13 +59,13 @@ class OdooDynamicReporting(models.Model):
         domain, rec_list =[], []
         if self.filter_type == "write_date_range": 
             domain = [
-                ('create_date', '>=', self.start_date),
-                ('create_date', '<=', self.end_date)
+                ('write_date', '>=', self.start_date),
+                ('write_date', '<=', self.end_date)
                 ]
         elif self.filter_type == "create_date_range":
             domain = [
-                ('write_date', '>=', self.start_date),
-                ('write_date', '<=', self.end_date)
+                ('create_date', '>=', self.start_date),
+                ('create_date', '<=', self.end_date)
                 ]
         model_name = self.model_id.model
         record_ids = self.env[model_name].search(domain)
