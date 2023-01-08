@@ -12,7 +12,7 @@
         'wizard/odoo_dynamic_report_view.xml',
         'security/ir.model.access.csv',
     ],
-    "images": ['images/export_img.png'],
+    "images": ['images/exporter.jpg'],
     "application": True, 
 
 }
